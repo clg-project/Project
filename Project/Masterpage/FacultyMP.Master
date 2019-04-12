@@ -1,0 +1,103 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="FacultyMP.Master.cs" Inherits="Project.FacultyMP" %>
+
+<!DOCTYPE html>
+<html>
+<head runat="server">
+    <title></title>
+    <link rel="stylesheet" href="~/CSS/main.css"/>
+    
+    <style type="text/css">
+        .auto-style1 {
+            width: 700px;
+            height: 100%;
+            vertical-align:central;    
+            margin-left:300px;
+            margin-right:300px;
+        }
+        .auto-style2 {
+            height: 53px;
+        }
+        .auto-style4 {
+            height: 276px;
+        }
+        .auto-style5 {
+            height: 49px;
+        }
+        .auto-style6 {
+            height: 49px;
+            width: 75px;
+        }
+        .auto-style7 {
+            height: 49px;
+            width: 98px;
+        }
+        .auto-style8 {
+            height: 49px;
+            width: 44px;
+        }
+        .auto-style9 {
+            height: 49px;
+            width: 96px;
+        }
+        .auto-style10 {
+            height: 61px;
+        }
+        .auto-style11 {
+            width: 64px;
+        }
+    </style>
+</head>
+<body>
+    
+    <form id="form1" runat="server">
+        <asp:Panel ID="p" runat="server" Direction="LeftToRight" Height="100%" Width="100%" BorderColor="Maroon" BorderStyle="Double"  >
+        <div>      
+                <table class="auto-style1" style="border-style: outset; border-width: medium;">
+                    <tr>
+                        <td colspan="5" class="auto-style2" colspan="6" style="border: thin dashed #FFFF00">
+                            <asp:Image ID="Image1" runat="server" Height="56px" ImageUrl="~/image/images.jpg" Width="244px" DescriptionUrl="~/Home/WebForm1.aspx"  />
+                            
+                        </td>
+                        <td>
+                           
+                                Hello,<asp:Label ID="Label1" runat="server"></asp:Label>
+                            
+                        </td>
+                    </tr>
+                    <tr >
+                        <td class="auto-style8" style="border: thin dashed #FFFF00; text-align: center">
+                            <asp:Button CssClass="menubtn" ID="Home_button" runat="server" Text="Home" PostBackUrl="~/Faculty/Faculty_homepage.aspx" Width="100px" />
+                        </td>
+                        <td class="auto-style6" style="border: thin dashed #FFFF00; text-align: center">
+                            <asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl="~/Faculty/Register.aspx">Register Student</asp:HyperLink>
+                        </td>
+                        <td class="auto-style11">
+                            <asp:HyperLink ID="addExam" runat="server" NavigateUrl="~/Faculty/add_Exam.aspx">Add Exam</asp:HyperLink>
+                        </td>
+                        <td class="auto-style11">
+                            <asp:HyperLink ID="addquestion" runat="server" NavigateUrl="~/Faculty/select_exam.aspx">Add Question</asp:HyperLink>
+                        </td>
+                        <td class="auto-style7" style="border: thin dashed #FFFF00; text-align: center">&nbsp;<asp:HyperLink ID="HyperLink3" runat="server" NavigateUrl="~/Faculty/showresult.aspx">Results</asp:HyperLink>
+                        </td>
+                        <td class="auto-style9" style="border: thin dashed #FFFF00; text-align: center">&nbsp;<asp:HyperLink ID="HyperLink5" runat="server" NavigateUrl="~/Faculty/Edit_profile_faculty.aspx">Edit Profile</asp:HyperLink>
+                        </td>
+                        <td class="auto-style5" style="text-align: center"></td>
+                    </tr>
+                    <tr>
+                        <td class="auto-style4" colspan="6" style="border: thin dashed #FFFF00">
+                            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                            </asp:ContentPlaceHolder>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="auto-style10" colspan="6" style="border: thin dashed #FFFF00">Developed By: - Parth gabani</td>
+                    </tr>
+                </table>
+            
+        </div>
+        </asp:panel>
+    </form>
+        
+</body>
+</html>
+

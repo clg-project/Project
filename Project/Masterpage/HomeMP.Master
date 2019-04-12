@@ -1,0 +1,65 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="HomeMP.Master.cs" Inherits="Project.HomeMP" %>
+
+<!DOCTYPE html><link rel="Stylesheet" href="~/StyleSheet1.css" type="text/css" /><html><head runat="server"><title></title><style type="text/css">
+        .auto-style1 {
+            width: 700px;
+            height: 100%;
+            vertical-align:central;
+            margin-left:23%;
+            margin-right:23%;
+        }
+        .auto-style2 {
+            height: 167px;
+        }
+        .auto-style5 {
+            height: 217px;
+            width: 399px;
+        }
+        .auto-style6 {
+            height: 217px;
+            width: 26px;
+        }
+        .auto-style7 {
+            height: 63px;
+        }
+    </style></head><body><form id="form1" runat="server" autocomplete="on" dir="auto" style="height: auto; width: auto">
+        <asp:Panel ID="p1" runat="server" Height="100%" Width="100%" Direction="LeftToRight" BorderStyle="None" BackImageUrl="~/Nbi7bYI.jpg" >
+    <table class="auto-style1" dir="ltr" style="background-color: #FFFFFF;">
+        <tr style="border: thin groove #00FFFF">
+            <td class="auto-style2" colspan="2">
+                <asp:Image ID="Image1" runat="server" Height="100%" ImageUrl="~/image/home photo.jpg" Width="100%" />
+            </td>
+        </tr>
+        <tr style="border: thin groove #00FFFF">
+            <td class="auto-style6" style="border: thin groove #00FFFF">
+                <br />
+                <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/Home/WebForm1.aspx">Home</asp:HyperLink>
+                <br />
+                <br />
+                <asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl="~/Home/login.aspx">Login</asp:HyperLink>
+                <br />
+                <br />
+                <asp:HyperLink ID="HyperLink3" runat="server" Width="60px" NavigateUrl="~/Home/AboutUs.aspx">About us</asp:HyperLink>
+            </td>
+            <td class="auto-style5" style="border: thin groove #00FFFF">
+                <div style="margin-left:40px;width:400px;">
+                <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server" >
+                </asp:ContentPlaceHolder>
+                    </div>
+            </td>
+        </tr>
+        <tr style="border: thin groove #00FFFF">
+            <td colspan="2" class="auto-style7">Developed By: parth gabani</td>
+        </tr>
+    </table>
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+   
+        </asp:Panel>
+    </form>
+    
+</body>
+</html>

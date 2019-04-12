@@ -1,0 +1,89 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site1.master.cs" Inherits="Project.Site1" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <title></title>
+    
+    <style type="text/css">
+        .auto-style1 {
+            width: 700px;
+            height: 100%;
+            vertical-align:central;    
+            margin-left:300px;
+            margin-right:300px;
+        }
+        .auto-style2 {
+            height: 53px;
+        }
+        .auto-style4 {
+            height: 276px;
+        }
+        .auto-style5 {
+            height: 49px;
+        }
+        .auto-style6 {
+            height: 49px;
+            width: 75px;
+        }
+        .auto-style7 {
+            height: 49px;
+            width: 98px;
+        }
+        .auto-style8 {
+            height: 49px;
+            width: 93px;
+        }
+        .auto-style9 {
+            height: 49px;
+            width: 96px;
+        }
+        .auto-style10 {
+            height: 61px;
+   
+        }
+    </style>
+</head>
+<body>
+    
+    <form id="form1" runat="server">
+        <asp:Panel ID="p" runat="server" Direction="LeftToRight" Height="100%" Width="100%" BorderColor="Maroon" BorderStyle="Double"  >
+        <div>      
+                <table class="auto-style1" style="border-style: outset; border-width: medium;">
+                    <tr>
+                        <td class="auto-style2" colspan="5" style="border: thin dashed #FFFF00">
+                            <asp:Image ID="Image1" runat="server" Height="56px" ImageUrl="~/image/images.jpg" Width="244px" DescriptionUrl="~/Home/WebForm1.aspx"  />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="auto-style8" style="border: thin dashed #FFFF00; text-align: center">
+                            <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/Student/Student_homepage.aspx">Home</asp:HyperLink>
+                        </td>
+                        <td class="auto-style6" style="border: thin dashed #FFFF00; text-align: center">
+                            <asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl="~/Student/Exam_selection.aspx">Give Test</asp:HyperLink>
+                        </td>
+                        <td class="auto-style7" style="border: thin dashed #FFFF00; text-align: center">&nbsp;<asp:HyperLink ID="HyperLink3" runat="server" NavigateUrl="~/Student/Result.aspx">Results</asp:HyperLink>
+                        </td>
+                        <td class="auto-style9" style="border: thin dashed #FFFF00; text-align: center">&nbsp;<asp:HyperLink ID="HyperLink5" runat="server" NavigateUrl="~/Student/Edit_profile_student.aspx">Edit Profile</asp:HyperLink>
+                        </td>
+                        <td class="auto-style5" style="text-align: center">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td class="auto-style4" colspan="5" style="border: thin dashed #FFFF00">
+                            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                                <br />
+                            </asp:ContentPlaceHolder>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="auto-style10" colspan="5" style="border: thin dashed #FFFF00">Developed By: - Parth gabani</td>
+                    </tr>
+                </table>
+            
+        </div>
+        </asp:panel>
+    </form>
+        
+</body>
+</html>

@@ -1,0 +1,50 @@
+﻿.menubtn
+{
+    background-color:transparent;
+    color:cornflowerblue;
+    font-family:Arial;
+    font-size:12px;
+    text-align:center;
+    display:block;
+    border:none;
+    padding:20px;
+    padding-left:30px;
+    padding-right:30px;
+    cursor:pointer;
+}
+body
+{
+    margin:0;
+}
+#tempbtn {
+    background-color: darkgreen;
+    height:35px;
+    font-size:20px;
+    font-weight:bold;
+    font-family:Arial;
+}
+#tempbtn ul {  
+    list-style:none;
+    padding:0;
+    margin:0;
+    text-align:center;
+}
+#tempbtn li
+{
+    display:inline;   
+    padding:15px;
+    vertical-align:middle;
+    padding-left:30px;
+}
+#tempbtn a{
+    text-decoration:none;   
+    color:white;    
+    vertical-align:middle;
+    padding-top:10px;
+    padding-bottom:10px;
+}
+#tempbtn a:hover
+{
+    color:black;
+    background-color:white;
+}

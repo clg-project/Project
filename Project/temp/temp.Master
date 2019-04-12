@@ -1,0 +1,73 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="temp.master.cs" Inherits="Project.temp1" %>
+
+<!DOCTYPE html>
+<html>
+<head runat="server">
+    <title></title>
+    <link rel="stylesheet" href="~/CSS/main.css"/>
+    
+    <style type="text/css">
+        .auto-style1 {
+            width: 700px;
+            height: 100%;
+            vertical-align:central;    
+            margin-left:300px;
+            margin-right:300px;
+        }
+        .auto-style2 {
+            height: 53px;
+        }
+        .auto-style4 {
+            height: 276px;
+        }
+        .auto-style10 {
+            height: 61px;
+        }
+        .auto-style11 {
+            height: 35px;
+        }
+    </style>
+</head>
+<body>
+    
+    <form id="form1" runat="server">
+        <asp:Panel ID="p" runat="server" Direction="LeftToRight" Height="100%" Width="100%" BorderColor="Maroon" BorderStyle="Double" BackImageUrl="~/Nbi7bYI.jpg"  >
+        <div>      
+                <table class="auto-style1" style="border: thin solid #FFFF00">
+                    <tr>
+                        <td class="auto-style2">
+                            <asp:Image ID="Image1" runat="server" Height="56px" ImageUrl="~/images.jpg" Width="244px"  />
+                        </td>
+                    </tr>  
+                   
+                    <tr ID="tempbtn">
+                        <td class="auto-style11">
+                            <asp:BulletedList ID="BulletedList1" runat="server" CssClass="tempulbtn" DisplayMode="HyperLink" OnClick="BulletedList1_Click">
+                                <asp:ListItem Value="~/WebForm1.aspx" >Home</asp:ListItem>
+                                <asp:ListItem Value="~/Register.aspx">Register</asp:ListItem>
+                                <asp:ListItem Value="~/Result.aspx">Result</asp:ListItem>
+                                <asp:ListItem Value="~/Edit_profile_faculty.aspx">Edit profile</asp:ListItem>
+                            </asp:BulletedList>
+                        </td>
+                    </tr>
+                   
+                    <tr>
+                        <td class="auto-style4" >
+                            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                                <p>
+                                    &nbsp;</p>
+                            </asp:ContentPlaceHolder>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="auto-style10" style="border: thin dashed #FFFF00">Developed By: - Parth gabani</td>
+                    </tr>
+                </table>
+            
+        </div>
+        </asp:panel>
+    </form>
+        
+</body>
+</html>
+

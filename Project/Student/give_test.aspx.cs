@@ -13,6 +13,7 @@ namespace Project
     public partial class give_test : System.Web.UI.Page
     {
         string ses;
+        static int qid;
         string exam_id;
         static DataTable dt;
         static SqlDataAdapter da;
@@ -52,6 +53,7 @@ namespace Project
             cn.Close();
             if (IsPostBack == false)
             {
+                qid = 0;
                 rowindex = 0;
                 resultanswer = 0;
                 cn.Open();
@@ -72,7 +74,9 @@ namespace Project
                 option2.Text = dt.Rows[rowindex]["Option2"].ToString();
                 option3.Text = dt.Rows[rowindex]["Option3"].ToString();
                 option4.Text = dt.Rows[rowindex]["Option4"].ToString();
-                crt_ans = dt.Rows[rowindex]["Answer"].ToString();
+                qid = Convert.ToInt32(dt.Rows[rowindex]["Que_id"]);
+                //Label3.Text = qid.ToString();
+                
                 qn = rowindex;
                 qn++;
                 qno.Text = qn.ToString();
@@ -80,20 +84,95 @@ namespace Project
             else
             {
                 upanel.Visible = false;
-                result(resultanswer, "pass");
+                if (req_mark <= resultanswer)
+                {
+                    result(resultanswer, "Pass");
+                }
+                else
+                {
+                    result(resultanswer, "Fail");
+                }
+                upanel.Visible = false;
             }
         }
-        protected void Button1_Click(object sender, EventArgs e)
+        protected void next_Click(object sender, EventArgs e)
+        {        
+            rowindex++;                   
+            getdata2();           
+            getanswer();
+        }
+        protected void previous_Click(object sender, EventArgs e)
         {
-            string ans = SelectedAnswer();   
-            if (string.Equals(ans,crt_ans))
+            if (rowindex > 0)
             {
-                resultanswer++;
+                rowindex--;
+                getdata2();               
+                getanswer();
             }
-            rowindex = rowindex + 1;       
-            radiobuttonunchecked();
-            getdata2();
-           
+            else
+            {
+                string script = "alert(\"There is no previous Question.\")";
+                ScriptManager.RegisterStartupScript(this, GetType(), "ServerControlScript", script, true);
+            }
+        }
+        protected void Submit_Click(object sender, EventArgs e)
+        {
+            string ans = SelectedAnswer();
+            if (ans == "nothing")
+            {
+                storeanswer("insert into tmpanswer values(@qid,'nothing',@sid)");
+            }
+            else
+            {
+                storeanswer("insert into tmpanswer values(@qid,'" + ans + "',@sid)");
+            }
+        }
+        public void getanswer()
+        {
+            try
+            {
+                cn.Open();
+                SqlCommand cmd = new SqlCommand("select Answer from tmpanswer where Que_id-@qid and Student_id=@sid",cn);
+                cmd.Parameters.AddWithValue("@qid",qid);
+                cmd.Parameters.AddWithValue("@sid", ses);
+                SqlDataReader dr = cmd.ExecuteReader();
+                if (dr.HasRows)
+                {
+                    while (dr.Read())
+                    {
+                        string ans = dr[0].ToString();
+                        Label3.Text = ans.ToString();
+                        setselected(ans);
+                    }
+                }
+                else
+                {
+                    radiobuttonunchecked();
+                }
+                cn.Close();
+                
+            }
+            catch(Exception ex)
+            {
+                Label3.Text = "Error"+ex.Message;
+            }
+        }
+        public void storeanswer(string s)
+        {
+            try
+            {
+                cn.Open();
+                SqlCommand cmd = new SqlCommand(s, cn);
+                cmd.Parameters.AddWithValue("@qid", qid);
+                cmd.Parameters.AddWithValue("@sid", ses);
+                cmd.ExecuteNonQuery();
+                cn.Close();             
+            }
+            catch(Exception e)
+            {
+                Label3.Text = e.Message;
+                
+            }      
         }
         
         public void result(int marks,string resultstr)
@@ -103,10 +182,9 @@ namespace Project
             cmd.Parameters.AddWithValue("@eid", exam_id);
             String Exam_name = cmd.ExecuteScalar().ToString();
             cn.Close();
-        
+      
             try
-            { 
-              
+            {               
                 cn.Open();
                 SqlCommand cmd1 = new SqlCommand("insert into Result values(@stu_id,@exam_id,@ename,@result,@mark)", cn);
                 cmd1.Parameters.AddWithValue("@stu_id",ses);
@@ -132,8 +210,44 @@ namespace Project
             }
         }
 
-        protected void Submit_Click1(object sender, EventArgs e)
+        protected void Finish_Click1(object sender, EventArgs e)
         {
+            try
+            {
+                cn.Open();
+                SqlCommand cmd = new SqlCommand("select *from tmpanswer where Student_id=@sid", cn);
+                cmd.Parameters.AddWithValue("@sid", ses);
+                SqlDataAdapter da = new SqlDataAdapter();
+                da.SelectCommand = cmd;
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+                cn.Close();
+
+                cn.Open();
+                SqlCommand cmd1 = new SqlCommand("select *from Question where Exam_id=@eid", cn);
+                cmd1.Parameters.AddWithValue("@eid", exam_id);
+                SqlDataAdapter da1 = new SqlDataAdapter();
+                da1.SelectCommand = cmd1;
+                DataTable dt1 = new DataTable();
+                da1.Fill(dt1);
+                cn.Close();
+
+                for (int i = 0; i <= tot_que; i++)
+                {
+                    string s1 = dt.Rows[i]["Answer"].ToString();
+                    string s2 = dt1.Rows[i]["Answer"].ToString();
+                    if (s1 == s2)
+                    {
+                        resultanswer++;
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                Label3.Text = ex.Message;
+            }
+
+            
             if (req_mark <= resultanswer)
             {
                 result(resultanswer, "Pass");
@@ -143,32 +257,7 @@ namespace Project
                 result(resultanswer, "Fail");
             }
             upanel.Visible = false;
-        }
-
-        public string SelectedAnswer()
-        {
-            if (RadioButton1.Checked == true)
-            {
-                return "A";
-            }
-            else if (RadioButton2.Checked == true)
-            {
-                return "B";
-            }
-            else if (RadioButton3.Checked == true)
-            {
-                return "C";
-            }
-
-            else if (RadioButton4.Checked == true)
-            {
-                return "D";
-            }
-            else
-            {
-                return "nothing";
-            }
-        }
+        } 
 
         protected void Timer1_Tick(object sender, EventArgs e)
         {
@@ -194,6 +283,49 @@ namespace Project
             RadioButton2.Checked = false;
             RadioButton3.Checked = false;
             RadioButton4.Checked = false;
+        }
+        public string SelectedAnswer()
+        {
+            if (RadioButton1.Checked == true)
+            {
+                return "A";
+            }
+            else if (RadioButton2.Checked == true)
+            {
+                return "B";
+            }
+            else if (RadioButton3.Checked == true)
+            {
+                return "C";
+            }
+
+            else if (RadioButton4.Checked == true)
+            {
+                return "D";
+            }
+            else
+            {
+                return "nothing";
+            }
+        }
+        public void setselected(string ans)
+        {
+            if (ans == "A")
+            {
+                RadioButton1.Checked = true;
+            }
+            else if (ans == "B")
+            {
+                RadioButton2.Checked = true;
+            }
+            else if (ans == "C")
+            {
+                RadioButton3.Checked = true;
+            }
+            else if (ans == "D")
+            {
+                RadioButton4.Checked = true;
+            }
         }
     }
 }

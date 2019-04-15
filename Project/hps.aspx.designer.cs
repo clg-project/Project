@@ -10,7 +10,7 @@
 namespace Project {
     
     
-    public partial class Student_homepage {
+    public partial class hps {
         
         /// <summary>
         /// Label1 control.

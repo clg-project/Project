@@ -65,7 +65,7 @@
                 <br />
                 <br />
                 <asp:Button ID="add_que" runat="server" Text="Add Question" CssClass="btn btn-primary" OnClick="add_que_Click" />&nbsp;
-                <asp:Button ID="Button1" runat="server" Text="Add Another Question" CssClass="btn btn-primary " OnClick="Button1_Click" />&nbsp;
+                <asp:Button ID="Button1" runat="server" Text="Clear Question" CssClass="btn btn-primary " OnClick="Button1_Click" />&nbsp;
                 <asp:Button ID="Button2" runat="server" Text="Show Question" CssClass="btn btn-primary " OnClick="Button2_Click" />&nbsp;
                 <asp:Button ID="Button3" runat="server" Text="Finish" CssClass="btn btn-primary" />
                 <asp:Label ID="result" runat="server"></asp:Label>

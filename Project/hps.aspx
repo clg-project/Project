@@ -1,8 +1,8 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Masterpage/student.Master" AutoEventWireup="true" CodeBehind="Student_homepage.aspx.cs" Inherits="Project.Student_homepage" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Masterpage/student.Master" AutoEventWireup="true" CodeBehind="hps.aspx.cs" Inherits="Project.hps" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    
 
-   <asp:Label ID="Label1" runat="server" Font-Bold="True" Font-Italic="True" Font-Size="XX-Large" ForeColor="Red" Text="Scope of online examination System..."></asp:Label>
+
+    <asp:Label ID="Label1" runat="server" Font-Bold="True" Font-Italic="True" Font-Size="XX-Large" ForeColor="Red" Text="Scope of online examination System..."></asp:Label>
     <br /><br /><br /><br />
 
     <p>
@@ -11,5 +11,7 @@
         ~  You just need to Internet Connection.<br />
 
     </p>
+
+
 
 </asp:Content>

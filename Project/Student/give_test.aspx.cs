@@ -24,7 +24,7 @@ namespace Project
         int qn;
         int totalseconds = 0, seconds = 60, minutes = 60;
         static int tot_que;
-        static string crt_ans ;
+        
         SqlConnection cn= new SqlConnection(ConfigurationManager.ConnectionStrings["TestConnectionString"].ConnectionString);
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -63,25 +63,24 @@ namespace Project
                 cn.Close();
                 getdata2();
             }
+            resultmsg.Text = "";
         }
        
         public void getdata2()
         {
-            if (rowindex < tot_que)
-            {
+            //if (rowindex < tot_que)
+            //{
                 Que_test.Text = dt.Rows[rowindex]["Question"].ToString();
                 option1.Text = dt.Rows[rowindex]["Option1"].ToString();
                 option2.Text = dt.Rows[rowindex]["Option2"].ToString();
                 option3.Text = dt.Rows[rowindex]["Option3"].ToString();
                 option4.Text = dt.Rows[rowindex]["Option4"].ToString();
-                qid = Convert.ToInt32(dt.Rows[rowindex]["Que_id"]);
-                //Label3.Text = qid.ToString();
-                
+                qid = Convert.ToInt32(dt.Rows[rowindex]["Que_id"]);  
                 qn = rowindex;
                 qn++;
                 qno.Text = qn.ToString();
-            }
-            else
+           //}
+            /*else
             {
                 upanel.Visible = false;
                 if (req_mark <= resultanswer)
@@ -92,14 +91,21 @@ namespace Project
                 {
                     result(resultanswer, "Fail");
                 }
-                upanel.Visible = false;
-            }
+            }*/
         }
         protected void next_Click(object sender, EventArgs e)
-        {        
-            rowindex++;                   
-            getdata2();           
-            getanswer();
+        {
+            if (rowindex == tot_que)
+            {
+                string script = "alert(\"There is no Next Question.\")";
+                ScriptManager.RegisterStartupScript(this, GetType(), "ServerControlScript", script, true);
+            }
+            else
+            {
+                rowindex++;
+                getdata2();
+                getanswer();
+            }
         }
         protected void previous_Click(object sender, EventArgs e)
         {
@@ -118,21 +124,42 @@ namespace Project
         protected void Submit_Click(object sender, EventArgs e)
         {
             string ans = SelectedAnswer();
-            if (ans == "nothing")
+            cn.Open();
+            SqlCommand cmd = new SqlCommand("select *from tmpanswer where Que_id=@qid AND Student_id=@sid", cn);
+            cmd.Parameters.AddWithValue("@qid",qid);
+            cmd.Parameters.AddWithValue("@sid", ses);
+            SqlDataReader dr = cmd.ExecuteReader();
+           
+            if (dr.HasRows)
             {
-                storeanswer("insert into tmpanswer values(@qid,'nothing',@sid)");
+                cn.Close();
+                cn.Open();
+                SqlCommand cmd1 = new SqlCommand("update tmpanswer set Answer=@ans where Que_id=@qid AND Student_id=@sid",cn);
+                cmd1.Parameters.AddWithValue("@ans",ans);
+                cmd1.Parameters.AddWithValue("@qid", qid);
+                cmd1.Parameters.AddWithValue("@sid", ses);
+                cmd1.ExecuteNonQuery();
             }
             else
             {
-                storeanswer("insert into tmpanswer values(@qid,'" + ans + "',@sid)");
+                cn.Close();
+                if (ans == "nothing")
+                {
+                    storeanswer("insert into tmpanswer values(@qid,'nothing',@sid)");
+                }
+                else
+                {
+                    storeanswer("insert into tmpanswer values(@qid,'" + ans + "',@sid)");
+                }
             }
+            resultmsg.Text = "Answer Submitted";
         }
         public void getanswer()
         {
             try
             {
                 cn.Open();
-                SqlCommand cmd = new SqlCommand("select Answer from tmpanswer where Que_id-@qid and Student_id=@sid",cn);
+                SqlCommand cmd = new SqlCommand("select *from tmpanswer where Que_id=@qid and Student_id=@sid",cn);
                 cmd.Parameters.AddWithValue("@qid",qid);
                 cmd.Parameters.AddWithValue("@sid", ses);
                 SqlDataReader dr = cmd.ExecuteReader();
@@ -140,8 +167,9 @@ namespace Project
                 {
                     while (dr.Read())
                     {
-                        string ans = dr[0].ToString();
+                        string ans = dr["Answer"].ToString();
                         Label3.Text = ans.ToString();
+                        radiobuttonunchecked();
                         setselected(ans);
                     }
                 }

@@ -37,6 +37,7 @@
             <br />
             <br />
             <asp:Button ID="Submit" runat="server" CssClass="btn btn-primary" OnClick="Submit_Click" Text="Submit" />
+            <asp:Label ID="resultmsg" runat="server"></asp:Label>
         <br />
         <br />
             

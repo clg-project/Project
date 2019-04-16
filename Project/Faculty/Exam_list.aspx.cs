@@ -14,26 +14,34 @@ namespace Project.Faculty
     public partial class Exam_list : System.Web.UI.Page
     {
         SqlConnection cn = new SqlConnection(ConfigurationManager.ConnectionStrings["TestConnectionString"].ConnectionString);
+        String faculty;
         protected void Page_Load(object sender, EventArgs e)
         {
-            
-            try
+            if(Session["faculty"] == null)
             {
-                cn.Open();
-                SqlCommand cmd = new SqlCommand("select *from exam where F_id=@fid", cn);
-                cmd.Parameters.AddWithValue("@fid", "akshay");
-                SqlDataAdapter da = new SqlDataAdapter();
-                da.SelectCommand = cmd;
-                DataTable dt = new DataTable();
-                da.Fill(dt);
-                GridView1.DataSource = dt;
-                GridView1.DataBind();
-                cn.Close();
+                Response.Redirect("~/Home/login.aspx");
             }
-            catch(Exception ex)
+            else
             {
-                resultmsg.Text=ex.Message;
+                faculty = Session["faculty"].ToString();
             }
+            if (!IsPostBack)
+            {
+                getdata();
+            }
+        }
+        public void getdata()
+        {
+            cn.Open();
+            SqlCommand cmd = new SqlCommand("select *from exam where F_id=@fid", cn);
+            cmd.Parameters.AddWithValue("@fid", faculty);
+            SqlDataAdapter da = new SqlDataAdapter();
+            da.SelectCommand = cmd;
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+            GridView1.DataSource = dt;
+            GridView1.DataBind();
+            cn.Close();
         }
 
         protected void GridView1_RowCommand(object sender, GridViewCommandEventArgs e)
@@ -52,6 +60,7 @@ namespace Project.Faculty
                         resultmsg.Text = "Exam not deleted";
                     }
                     cn.Close();
+                    getdata();
                 }
                 catch(Exception ex)
                 {

@@ -111,6 +111,7 @@
     <Content Include="Home\code_verification.aspx" />
     <Content Include="Home\New_password.aspx" />
     <Content Include="hps.aspx" />
+    <Content Include="image\1.png" />
     <Content Include="Masterpage\demo.aspx" />
     <Content Include="Student\Edit_profile_student.aspx" />
     <Content Include="Faculty\Faculty_homepage.aspx" />

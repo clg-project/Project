@@ -95,7 +95,9 @@ namespace Project
         }
         protected void next_Click(object sender, EventArgs e)
         {
-            if (rowindex == tot_que)
+            int i=rowindex;
+            i++;
+            if (i >= tot_que)
             {
                 string script = "alert(\"There is no Next Question.\")";
                 ScriptManager.RegisterStartupScript(this, GetType(), "ServerControlScript", script, true);
@@ -109,12 +111,15 @@ namespace Project
         }
         protected void previous_Click(object sender, EventArgs e)
         {
-            if (rowindex > 0)
-            {
+                int i=rowindex;
+            i--;
+                if (i >= 0)
+                {
                 rowindex--;
-                getdata2();               
-                getanswer();
-            }
+                    getdata2();
+                    getanswer();
+                }
+            
             else
             {
                 string script = "alert(\"There is no previous Question.\")";

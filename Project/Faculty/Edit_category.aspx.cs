@@ -13,20 +13,25 @@ namespace Project.Faculty
     public partial class Edit_category : System.Web.UI.Page
     {
         SqlConnection cn = new SqlConnection(ConfigurationManager.ConnectionStrings["TestConnectionString"].ConnectionString);
+        string cid;
         protected void Page_Load(object sender, EventArgs e)
         {
-            cn.Open();
-            SqlCommand cmd = new SqlCommand("select *from category where Category_id=@cid", cn);
-            cmd.Parameters.AddWithValue("@cid", 1);
-            SqlDataReader dr = cmd.ExecuteReader();
-            if (dr.HasRows)
+            cid = Request.QueryString["cid"];
+            if (!IsPostBack)
             {
-                while (dr.Read())
+                cn.Open();
+                SqlCommand cmd = new SqlCommand("select *from category where Category_id=@cid", cn);
+                cmd.Parameters.AddWithValue("@cid", cid);
+                SqlDataReader dr = cmd.ExecuteReader();
+                if (dr.HasRows)
                 {
-                    textbox1.Text = dr["Category_name"].ToString();
+                    while (dr.Read())
+                    {
+                        textbox1.Text = dr["Category_name"].ToString();
+                    }
                 }
+                cn.Close();
             }
-            cn.Close();
         }
 
         protected void b1_Click(object sender, EventArgs e)
@@ -34,11 +39,12 @@ namespace Project.Faculty
             cn.Open();
             SqlCommand cmd = new SqlCommand("update category set Category_name=@cname where Category_id=@cid", cn);
             cmd.Parameters.AddWithValue("@cname", textbox1.Text);
-            cmd.Parameters.AddWithValue("@cid", 1);
+            cmd.Parameters.AddWithValue("@cid", cid);
             int i = cmd.ExecuteNonQuery();
             if (i > 0)
             {
                 resultmsg.Text = "Record Successfully updated";
+                Response.Redirect("category_list.aspx");
             }
             cn.Close();
         }

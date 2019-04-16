@@ -37,21 +37,21 @@
                 <li class="nav-item">
                     <img src="../assets/image/student.png" alt="Logo Here" class="img-fluid rounded mx-auto d-block" width="100px" />
                 </li>
-               <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Subject">
+               <li class="nav-item"  data-placement="right" >
                     <a class="nav-link" href="Student_homepage.aspx">
                       <i class="fa fa-home" aria-hidden="true"></i>
                         <span class="nav-link-text"> Home </span>
                     </a>
                 </li>
                 
-                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Exam">
+                <li class="nav-item"  data-placement="right" >
                     <a class="nav-link" href="Exam_selection.aspx">
                         <i class="fa fa-book" aria-hidden="true"></i>
                         <span class="nav-link-text"> Exam </span>
                     </a>
                 </li>
                 
-                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Result">
+                <li class="nav-item"  data-placement="right" >
                     <a class="nav-link" href="Result.aspx">
                         <i class="fa fa-trophy" aria-hidden="true"></i>
                         <span class="nav-link-text"> Result</span>

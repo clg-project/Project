@@ -10,7 +10,7 @@
                     </asp:TemplateField>
                 <asp:TemplateField>
                     <ItemTemplate>
-                        <asp:Button ID="editcat" runat="server" Text="Edit" CssClass="btn btn-primary"  />
+                        <asp:Button ID="editcat" runat="server" Text="Edit" CssClass="btn btn-primary" PostBackUrl='<%# "~/Faculty/Edit_category.aspx?cid="+Eval("Category_id") %>' />
                         <asp:Button ID="deletecat" runat="server" Text="Delete"  CssClass="btn btn-primary" CommandName="deletecat" CommandArgument='<%# Eval("Category_id") %>' />
                     </ItemTemplate>
                 </asp:TemplateField>

@@ -15,32 +15,48 @@ namespace Project.Faculty
         SqlConnection cn = new SqlConnection(ConfigurationManager.ConnectionStrings["TestConnectionString"].ConnectionString);
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!IsPostBack)
+            {
+                getdata();
+            }
+            
+        }
+        public void getdata()
+        {
             cn.Open();
             string s = "select *from category";
-            SqlCommand cmd = new SqlCommand(s,cn);
+            SqlCommand cmd = new SqlCommand(s, cn);
             SqlDataAdapter da = new SqlDataAdapter();
             da.SelectCommand = cmd;
             DataTable dt = new DataTable();
             da.Fill(dt);
             GridView1.DataSource = dt;
-            GridView1.DataBind();   
+            GridView1.DataBind();
             cn.Close();
+
         }
 
         protected void GridView1_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             if(e.CommandName == "deletecat")
             {
-                cn.Open();
-                SqlCommand cmd = new SqlCommand("delete from category where Category_id=@cid", cn);
-                cmd.Parameters.AddWithValue("@cid",e.CommandArgument);
-                int i = cmd.ExecuteNonQuery();
-                if (i <= 0)
+                try
                 {
-                    resultmsg.Text = "We cannot delete this record";
+                    cn.Open();
+                    SqlCommand cmd = new SqlCommand("delete from category where Category_id=@cid", cn);
+                    cmd.Parameters.AddWithValue("@cid", e.CommandArgument);
+                    int i = cmd.ExecuteNonQuery();
+                    if (i <= 0)
+                    {
+                        resultmsg.Text = "We cannot delete this record";
+                    }
+                    cn.Close();
+                    getdata();
                 }
-                cn.Close();
-
+                catch(Exception ex)
+                {
+                    resultmsg.Text = ex.Message;
+                }
             }
         }
     }

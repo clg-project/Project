@@ -11,7 +11,7 @@ namespace Project
 {
     public partial class Edit_profile_student : System.Web.UI.Page
     {
-        string s;
+        string ses;
         SqlConnection cn = new SqlConnection(ConfigurationManager.ConnectionStrings["TestConnectionString"].ConnectionString);
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -21,12 +21,18 @@ namespace Project
             }
             else
             {
-                s = Session["student"].ToString();
+                ses = Session["student"].ToString();
             }
-
+            if (!IsPostBack)
+            {
+                getdata();
+            }
+        }
+        public void getdata()
+        {
             cn.Open();
-            SqlCommand cmd = new SqlCommand("select *from Student where Student_id=@sid",cn);
-            cmd.Parameters.AddWithValue("@sid",s);
+            SqlCommand cmd = new SqlCommand("select *from Student where Student_id=@sid", cn);
+            cmd.Parameters.AddWithValue("@sid", ses);
             SqlDataReader dr = cmd.ExecuteReader();
             while (dr.Read())
             {
@@ -54,7 +60,6 @@ namespace Project
             }
             cn.Close();
         }
-
         protected void Button3_Click(object sender, EventArgs e)
         {
             try
@@ -69,20 +74,21 @@ namespace Project
                 cmd.Parameters.AddWithValue("@pin", TextBox7.Text);
                 cmd.Parameters.AddWithValue("@country", TextBox8.Text);
                 string s = TextBox9.Text;
-                DateTime dt = DateTime.ParseExact(s, "dd/MM/yyyy", null);
+                DateTime dt = DateTime.Parse(s);
                 cmd.Parameters.AddWithValue("@dob", dt);
                 cmd.Parameters.AddWithValue("@gender", RadioButtonList1.SelectedValue);
                 cmd.Parameters.AddWithValue("@mno", TextBox10.Text);
                 cmd.Parameters.AddWithValue("@email", TextBox11.Text);
-                cmd.Parameters.AddWithValue("@sid", s);
+                cmd.Parameters.AddWithValue("@sid", ses);
                 int i = cmd.ExecuteNonQuery();
                 if (i <= 0)
                 {
-                    resultmsg.Text = "There is some problem updating Profile";
+                    resultmsg.Text = "There is some problem updating Profile"+s;
                 }
                 else
                 {
                     resultmsg.Text = "Profile Updated Successfully";
+
                 }
                 cn.Close();
                 ClearInputs(Page.Controls);
@@ -90,15 +96,13 @@ namespace Project
             }
             catch(Exception ex)
             {
-                resultmsg.Text = ex.Message;
+               resultmsg.Text = ex.Message;
             }
             
         }
         protected void Button4_Click(object sender, EventArgs e)
         {
             ClearInputs(Page.Controls);
-        
-            
             RadioButtonList1.SelectedIndex = -1;
         }
         void ClearInputs(ControlCollection ctrls)

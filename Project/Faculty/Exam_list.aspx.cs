@@ -55,7 +55,7 @@ namespace Project.Faculty
                     SqlCommand cmd = new SqlCommand("delete from Exam where [Exam-id]=@eid", cn);
                     cmd.Parameters.AddWithValue("@eid", e.CommandArgument);
                     int i = cmd.ExecuteNonQuery();
-                    if (i >= 0)
+                    if (i <= 0)
                     {
                         resultmsg.Text = "Exam not deleted";
                     }

@@ -22,7 +22,10 @@ namespace Project
         static int resultanswer;
         static int req_mark;
         int qn;
-        int totalseconds = 0, seconds = 60, minutes = 60;
+        static int Exam_minute;
+        static int totalseconds = 0, seconds = 60, minutes = 60;
+        static DateTime finish_time;
+        DateTime current_time;
         static int tot_que;
         
         SqlConnection cn= new SqlConnection(ConfigurationManager.ConnectionStrings["TestConnectionString"].ConnectionString);
@@ -62,10 +65,20 @@ namespace Project
                 req_mark =Convert.ToInt16(cmd1.ExecuteScalar());
                 cn.Close();
                 getdata2();
+                Exam_minute = Convert.ToInt16(Session["time"]) / 60;
+                current_time = DateTime.Now;
+                finish_time = current_time.AddMinutes(Exam_minute);
+                //Label3.Text = finish_time.ToString();
             }
             resultmsg.Text = "";
+            
+            
         }
-       
+
+        public void Page_Unload()
+        {
+            Response.Write("Hello,world");
+        }
         public void getdata2()
         {
             //if (rowindex < tot_que)
@@ -173,7 +186,7 @@ namespace Project
                     while (dr.Read())
                     {
                         string ans = dr["Answer"].ToString();
-                        Label3.Text = ans.ToString();
+                       
                         radiobuttonunchecked();
                         setselected(ans);
                     }
@@ -245,6 +258,19 @@ namespace Project
 
         protected void Finish_Click1(object sender, EventArgs e)
         {
+            calculate_mark();
+            if (req_mark <= resultanswer)
+            {
+                result(resultanswer, "Pass");
+            }
+            else
+            {
+                result(resultanswer, "Fail");
+            }
+            upanel.Visible = false;
+        } 
+        public void calculate_mark()
+        {
             try
             {
                 cn.Open();
@@ -275,39 +301,44 @@ namespace Project
                     }
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Label3.Text = ex.Message;
             }
 
-            
-            if (req_mark <= resultanswer)
-            {
-                result(resultanswer, "Pass");
-            }
-            else
-            {
-                result(resultanswer, "Fail");
-            }
-            upanel.Visible = false;
-        } 
 
+        }
         protected void Timer1_Tick(object sender, EventArgs e)
         {
-            Session["time"] = Convert.ToInt16(Session["time"]) - 1;
-            if (Convert.ToInt16(Session["time"]) <= 0)
+            current_time = DateTime.Now;
+            int remaining_seconds=Convert.ToInt32((finish_time - current_time).TotalSeconds);
+            Session["time"] = remaining_seconds;
+            int i = DateTime.Compare(current_time, finish_time);
+            //Label3.Text = remaining_seconds.ToString();
+            if (i < 0)
             {
-                clock.Text = "Timeout!";
-                Next.Visible = false;
-            }
-            else
-            {
+                //Label3.Text = remaining_seconds.ToString();
                 totalseconds = Convert.ToInt16(Session["time"]);
                 seconds = totalseconds % 60;
                 minutes = totalseconds / 60;
-                
                 clock.Text = minutes + ":" + seconds;
             }
+            else
+            {           
+                clock.Text = "Timeout!";
+                Next.Visible = false;
+                calculate_mark();
+                if (req_mark <= resultanswer)
+                {
+                    result(resultanswer, "Pass");
+                }
+                else
+                {
+                    result(resultanswer, "Fail");
+                }
+                upanel.Visible = false;
+            }
+           
         }
 
         public void radiobuttonunchecked()

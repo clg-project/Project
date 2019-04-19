@@ -19,6 +19,9 @@
                 </ItemTemplate>
             </asp:TemplateField>
         </Columns>
+        <EmptyDataTemplate>
+            No Student.
+        </EmptyDataTemplate>
     </asp:GridView>
     <asp:Label ID="resultmsg" runat="server" style="margin-left:50px;" Text=""></asp:Label>
     </asp:Content>

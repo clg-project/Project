@@ -12,9 +12,18 @@ namespace Project.Faculty
 {
     public partial class student_list : System.Web.UI.Page
     {
+        string faculty;
         SqlConnection cn = new SqlConnection(ConfigurationManager.ConnectionStrings["TestConnectionString"].ConnectionString);
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["faculty"] == null)
+            {
+                Response.Redirect("~/Home/login.aspx");
+            }
+            else
+            {
+                faculty = Session["faculty"].ToString();
+            }
             if (!IsPostBack)
             {
                 getdata();
@@ -23,7 +32,8 @@ namespace Project.Faculty
         public void getdata()
         {
             cn.Open();
-            SqlCommand cmd = new SqlCommand("select *from student", cn);
+            SqlCommand cmd = new SqlCommand("select *from student where F_id=@fid", cn);
+            cmd.Parameters.AddWithValue("@fid", faculty);
             SqlDataAdapter da = new SqlDataAdapter();
             da.SelectCommand = cmd;
             DataTable dt = new DataTable();

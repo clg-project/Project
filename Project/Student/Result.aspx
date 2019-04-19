@@ -4,7 +4,7 @@
     
     <asp:GridView ID="GridView1" runat="server" Cssclass="table table-bordered" AutoGenerateColumns="False" style="margin-left:50px;">
         <Columns>
-            <asp:TemplateField HeaderText="Exam ID">
+            <asp:TemplateField HeaderText="Exam Name">
                 <ItemTemplate>
                     <asp:Label ID="Label1" runat="server" Text='<%# Bind("Exam_name") %>' ></asp:Label>
                 </ItemTemplate>

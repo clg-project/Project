@@ -29,7 +29,7 @@ namespace Project.Faculty
         {
             cn.Open();
             SqlCommand cmd = new SqlCommand("update Faculty set password=@pass where F_id=@fid", cn);
-            cmd.Parameters.AddWithValue("@fid",s);
+            cmd.Parameters.AddWithValue("@fid", s);
             cmd.Parameters.AddWithValue("@pass", TextBox1.Text);
             int i = cmd.ExecuteNonQuery();
             if (i <= 0)
@@ -39,6 +39,7 @@ namespace Project.Faculty
             else
             {
                 Label1.Text = "Password chnaged successfully";
+
             }
             cn.Close();
         }

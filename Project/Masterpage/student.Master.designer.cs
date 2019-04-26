@@ -22,13 +22,58 @@ namespace Layout_1 {
         protected global::System.Web.UI.HtmlControls.HtmlForm adminsmaster;
         
         /// <summary>
-        /// link_loginout control.
+        /// Home control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton link_loginout;
+        protected global::System.Web.UI.WebControls.HyperLink Home;
+        
+        /// <summary>
+        /// Exam control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink Exam;
+        
+        /// <summary>
+        /// Result control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink Result;
+        
+        /// <summary>
+        /// EditProfile control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink EditProfile;
+        
+        /// <summary>
+        /// ResetPassword control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink ResetPassword;
+        
+        /// <summary>
+        /// link_logout control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton link_logout;
         
         /// <summary>
         /// ContentPlaceHolder1 control.

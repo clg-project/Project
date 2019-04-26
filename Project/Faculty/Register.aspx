@@ -8,6 +8,8 @@
                 <td>
                     <asp:TextBox ID="TextBox1" runat="server" CssClass="form-control" Width="225px" ></asp:TextBox><asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="TextBox1" ErrorMessage="*Enter ID" ForeColor="#FF3300" ValidationGroup="errmsg" Display="Dynamic"></asp:RequiredFieldValidator>
                     
+                    <asp:Label ID="errsid" runat="server" ForeColor="Red"></asp:Label>
+                    
                 </td>
             </tr>
             <tr>

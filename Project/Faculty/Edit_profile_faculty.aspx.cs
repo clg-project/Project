@@ -23,22 +23,25 @@ namespace Project
             {
                 s = Session["faculty"].ToString();
             }
-            cn.Open();
-            SqlCommand cmd = new SqlCommand("select *from Faculty where F_id=@fid", cn);
-            cmd.Parameters.AddWithValue("@fid",s);
-            SqlDataReader dr = cmd.ExecuteReader();
-            while (dr.Read())
+            if (!IsPostBack)
             {
-                TextBox2.Text = dr["F_name"].ToString();
-                TextBox3.Text = dr["Email_id"].ToString();
+                cn.Open();
+                SqlCommand cmd = new SqlCommand("select *from Faculty where F_id=@fid", cn);
+                cmd.Parameters.AddWithValue("@fid", s);
+                SqlDataReader dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    TextBox2.Text = dr["F_name"].ToString();
+                    TextBox3.Text = dr["Email_id"].ToString();
+                }
+                cn.Close();
             }
-            cn.Close();
         }
 
         protected void Button1_Click(object sender, EventArgs e)
         {
             cn.Open();
-            SqlCommand cmd = new SqlCommand("update Faculty set F_name=@fname,Email_id=@email where F_id=@fid", cn);       
+            SqlCommand cmd = new SqlCommand("update Faculty set F_name=@fname,Email_id=@email where F_id=@fid", cn);
             cmd.Parameters.AddWithValue("@email", TextBox3.Text);
             cmd.Parameters.AddWithValue("@fname", TextBox2.Text);
             cmd.Parameters.AddWithValue("@fid", s);

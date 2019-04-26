@@ -25,6 +25,7 @@ namespace Project.Student
             {
                 s = Session["student"].ToString();
             }
+
             if (IsPostBack == false)
             {
                 cn.Open();
@@ -51,21 +52,19 @@ namespace Project.Student
         protected void Button1_Click(object sender, EventArgs e)
         {
             cn.Open();
-            SqlCommand cmd = new SqlCommand("select Time from Exam where [Exam-id]=@eid",cn);
-            cmd.Parameters.AddWithValue("@eid",DropDownList1.SelectedValue);
+            SqlCommand cmd = new SqlCommand("select Time from Exam where [Exam-id]=@eid", cn);
+            cmd.Parameters.AddWithValue("@eid", DropDownList1.SelectedValue);
             int i = Convert.ToInt16(cmd.ExecuteScalar());
             int totalseconds = i * 60;
             Session["time"] = totalseconds;
             Response.Redirect("Exam_detail.aspx?exam_id=" + DropDownList1.SelectedValue);
-            //Session["ex"] = DropDownList1.SelectedValue.ToString();
+
         }
 
         protected void DropDownList1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            /*HttpCookie ck = new HttpCookie("ck");
-            ck["Exam_id"] = "E01";
-            Response.Cookies.Add(ck);*/
-            
+
+
         }
     }
 }

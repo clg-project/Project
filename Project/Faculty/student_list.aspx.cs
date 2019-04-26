@@ -45,7 +45,11 @@ namespace Project.Faculty
         {
             if (e.CommandName == "deletestudent")
             {
-                SqlConnection cn = new SqlConnection(ConfigurationManager.ConnectionStrings["TestConnectionString"].ConnectionString);
+                cn.Open();
+                SqlCommand cmd1 = new SqlCommand("delete from Result where Student_id=@sid", cn);
+                cmd1.Parameters.AddWithValue("@sid", e.CommandArgument);
+                int i1 = cmd1.ExecuteNonQuery();
+                cn.Close();
                 cn.Open();
                 SqlCommand cmd = new SqlCommand("delete from Student where Student_id=@sid", cn);
                 cmd.Parameters.AddWithValue("@sid", e.CommandArgument);
@@ -56,7 +60,7 @@ namespace Project.Faculty
                 }
                 else
                 {
-                    resultmsg.Text="Student deleted";
+                    //resultmsg.Text = "Student deleted";
                 }
                 cn.Close();
                 getdata();

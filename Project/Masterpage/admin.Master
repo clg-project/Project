@@ -12,18 +12,16 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <title>Welcome Admin - Online Exam System</title>
-    <!-- Bootstrap core CSS-->
+
     <link href="~/assets/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Custom fonts for this template-->
     <link href="~/assets/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <!-- Custom styles for this template-->
     <link href="~/assets/css/custom.css" rel="stylesheet">
     
 </head>
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
     <form  runat="server" id="adminsmaster">
-    <!-- Navigation-->
+
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
         <a class="navbar-brand" href="index.aspx" >Online Exam System</a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -86,7 +84,7 @@
             </ul>
             <ul class="navbar-nav ml-auto">
               <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" aria-haspopup="true" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="fa fa-user-circle-o" aria-hidden="true"></i>
                         Profile
                     </a>
@@ -116,9 +114,7 @@
     <div class="content-wrapper">
         
             <div class="container">
-                <!-- Icon Cards-->
                 <div class="row">
-                    <!-- main content goes here -->
                     <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
                     </asp:ContentPlaceHolder>
 
@@ -126,8 +122,6 @@
             </div>
         
         
-        <!-- /.container-fluid-->
-        <!-- /.content-wrapper-->
         <footer class="sticky-footer">
             <div class="container">
                 <div class="text-center">
@@ -135,11 +129,11 @@
                 </div>
             </div>
         </footer>
-        <!-- Scroll to Top Button-->
+
         <a class="scroll-to-top rounded" href="#page-top">
             <i class="fa fa-angle-up"></i>
         </a>
-        <!-- Bootstrap core JavaScript-->
+
         <script src="../assets/js/jquery.min.js"></script>
         <script src="../assets/js/bootstrap.bundle.min.js"></script>
         <script src="../assets/js/custom.js"></script>

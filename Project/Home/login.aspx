@@ -13,7 +13,7 @@
         <asp:ListItem Value="Student">Student</asp:ListItem>
     </asp:RadioButtonList>
 
-        <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="login_user" Display="Dynamic" ErrorMessage="*Select User type" ForeColor="#FF3300" ValidationGroup="log"></asp:RequiredFieldValidator>
+        &nbsp;<asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="login_user" Display="Dynamic" ErrorMessage="*Select User type" ForeColor="#FF3300" ValidationGroup="log"></asp:RequiredFieldValidator>
 
         <p >
     <asp:Label ID="Label1" runat="server" Text="Username :"></asp:Label>

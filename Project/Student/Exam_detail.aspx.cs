@@ -20,6 +20,8 @@ namespace Project.Student
         protected void Page_Load(object sender, EventArgs e)
         {
             p2.Visible = false;
+            eid = Request.QueryString["exam_id"];
+            sid = Session["student"].ToString();
             if (Session["student"] == null)
             {
                 Response.Redirect("~/Home/login.aspx");
@@ -29,9 +31,18 @@ namespace Project.Student
                 s = Session["student"].ToString();
             }
 
+            if (!(Session["exam_track"] == null))
+            {
+                if (Session["exam_track"].ToString() == eid)
+                {
+                    p1.Visible = false;
+                    p2.Visible = true;
+                    resultmsg.Text = "You exited Exam without saving";
+                }
+            }
+
             p1.Visible = false;
-            eid = Request.QueryString["exam_id"];
-            sid = Session["student"].ToString();
+            
             cn.Open();
             SqlCommand cmd = new SqlCommand("select *from Result where Student_id=@sid and Exam_id=@eid", cn);
             cmd.Parameters.AddWithValue("@sid",sid);
@@ -88,6 +99,7 @@ namespace Project.Student
 
         protected void Start_Click(object sender, EventArgs e)
         {
+            Session["exam_record"] = eid;
             Response.Redirect("give_test.aspx?exam_id=" +eid);
         }
     }

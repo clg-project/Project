@@ -9,7 +9,7 @@ using System.Data;
 using System.Configuration;
 
 namespace Project
-{   
+{
     public partial class give_test : System.Web.UI.Page
     {
         string ses;
@@ -27,8 +27,8 @@ namespace Project
         static DateTime finish_time;
         DateTime current_time;
         static int tot_que;
-        
-        SqlConnection cn= new SqlConnection(ConfigurationManager.ConnectionStrings["TestConnectionString"].ConnectionString);
+
+        SqlConnection cn = new SqlConnection(ConfigurationManager.ConnectionStrings["TestConnectionString"].ConnectionString);
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["student"] == null)
@@ -39,9 +39,9 @@ namespace Project
             {
                 ses = Session["student"].ToString();
             }
-            
-            exam_id = Request.QueryString["exam_id"];    
-            dt = new DataTable();                              
+
+            exam_id = Request.QueryString["exam_id"];
+            dt = new DataTable();
             string s5 = "select *from Question where Exam_id=@eid";
             cn.Open();
             SqlCommand cmd = new SqlCommand(s5, cn);
@@ -61,38 +61,32 @@ namespace Project
                 resultanswer = 0;
                 cn.Open();
                 SqlCommand cmd1 = new SqlCommand("select Req_marks from Exam where [Exam-id]=@eid", cn);
-                cmd1.Parameters.AddWithValue("@eid",exam_id);
-                req_mark =Convert.ToInt16(cmd1.ExecuteScalar());
+                cmd1.Parameters.AddWithValue("@eid", exam_id);
+                req_mark = Convert.ToInt16(cmd1.ExecuteScalar());
                 cn.Close();
                 getdata2();
                 Exam_minute = Convert.ToInt16(Session["time"]) / 60;
                 current_time = DateTime.Now;
                 finish_time = current_time.AddMinutes(Exam_minute);
+                disablebutton();
                 //Label3.Text = finish_time.ToString();
             }
             resultmsg.Text = "";
-            
-            
-        }
-
-        public void Page_Unload()
-        {
-            Response.Write("Hello,world");
         }
         public void getdata2()
         {
             //if (rowindex < tot_que)
             //{
-                Que_test.Text = dt.Rows[rowindex]["Question"].ToString();
-                option1.Text = dt.Rows[rowindex]["Option1"].ToString();
-                option2.Text = dt.Rows[rowindex]["Option2"].ToString();
-                option3.Text = dt.Rows[rowindex]["Option3"].ToString();
-                option4.Text = dt.Rows[rowindex]["Option4"].ToString();
-                qid = Convert.ToInt32(dt.Rows[rowindex]["Que_id"]);  
-                qn = rowindex;
-                qn++;
-                qno.Text = qn.ToString();
-           //}
+            Que_test.Text = dt.Rows[rowindex]["Question"].ToString();
+            option1.Text = dt.Rows[rowindex]["Option1"].ToString();
+            option2.Text = dt.Rows[rowindex]["Option2"].ToString();
+            option3.Text = dt.Rows[rowindex]["Option3"].ToString();
+            option4.Text = dt.Rows[rowindex]["Option4"].ToString();
+            qid = Convert.ToInt32(dt.Rows[rowindex]["Que_id"]);
+            qn = rowindex;
+            qn++;
+            qno.Text = qn.ToString();
+            //}
             /*else
             {
                 upanel.Visible = false;
@@ -108,7 +102,7 @@ namespace Project
         }
         protected void next_Click(object sender, EventArgs e)
         {
-            int i=rowindex;
+            int i = rowindex;
             i++;
             if (i >= tot_que)
             {
@@ -124,15 +118,15 @@ namespace Project
         }
         protected void previous_Click(object sender, EventArgs e)
         {
-                int i=rowindex;
+            int i = rowindex;
             i--;
-                if (i >= 0)
-                {
+            if (i >= 0)
+            {
                 rowindex--;
-                    getdata2();
-                    getanswer();
-                }
-            
+                getdata2();
+                getanswer();
+            }
+
             else
             {
                 string script = "alert(\"There is no previous Question.\")";
@@ -144,16 +138,16 @@ namespace Project
             string ans = SelectedAnswer();
             cn.Open();
             SqlCommand cmd = new SqlCommand("select *from tmpanswer where Que_id=@qid AND Student_id=@sid", cn);
-            cmd.Parameters.AddWithValue("@qid",qid);
+            cmd.Parameters.AddWithValue("@qid", qid);
             cmd.Parameters.AddWithValue("@sid", ses);
             SqlDataReader dr = cmd.ExecuteReader();
-           
+
             if (dr.HasRows)
             {
                 cn.Close();
                 cn.Open();
-                SqlCommand cmd1 = new SqlCommand("update tmpanswer set Answer=@ans where Que_id=@qid AND Student_id=@sid",cn);
-                cmd1.Parameters.AddWithValue("@ans",ans);
+                SqlCommand cmd1 = new SqlCommand("update tmpanswer set Answer=@ans where Que_id=@qid AND Student_id=@sid", cn);
+                cmd1.Parameters.AddWithValue("@ans", ans);
                 cmd1.Parameters.AddWithValue("@qid", qid);
                 cmd1.Parameters.AddWithValue("@sid", ses);
                 cmd1.ExecuteNonQuery();
@@ -177,8 +171,8 @@ namespace Project
             try
             {
                 cn.Open();
-                SqlCommand cmd = new SqlCommand("select *from tmpanswer where Que_id=@qid and Student_id=@sid",cn);
-                cmd.Parameters.AddWithValue("@qid",qid);
+                SqlCommand cmd = new SqlCommand("select *from tmpanswer where Que_id=@qid and Student_id=@sid", cn);
+                cmd.Parameters.AddWithValue("@qid", qid);
                 cmd.Parameters.AddWithValue("@sid", ses);
                 SqlDataReader dr = cmd.ExecuteReader();
                 if (dr.HasRows)
@@ -186,7 +180,7 @@ namespace Project
                     while (dr.Read())
                     {
                         string ans = dr["Answer"].ToString();
-                       
+
                         radiobuttonunchecked();
                         setselected(ans);
                     }
@@ -196,11 +190,11 @@ namespace Project
                     radiobuttonunchecked();
                 }
                 cn.Close();
-                
+
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                Label3.Text = "Error"+ex.Message;
+                Label3.Text = "Error" + ex.Message;
             }
         }
         public void storeanswer(string s)
@@ -212,48 +206,48 @@ namespace Project
                 cmd.Parameters.AddWithValue("@qid", qid);
                 cmd.Parameters.AddWithValue("@sid", ses);
                 cmd.ExecuteNonQuery();
-                cn.Close();             
+                cn.Close();
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Label3.Text = e.Message;
-                
-            }      
+            }
         }
-        
-        public void result(int marks,string resultstr)
+
+        public void result(int marks, string resultstr)
         {
             cn.Open();
-            SqlCommand cmd = new SqlCommand("select Exam_name from Exam where [Exam-id]=@eid",cn);
+            SqlCommand cmd = new SqlCommand("select Exam_name from Exam where [Exam-id]=@eid", cn);
             cmd.Parameters.AddWithValue("@eid", exam_id);
             String Exam_name = cmd.ExecuteScalar().ToString();
             cn.Close();
-      
-            try
-            {               
-                cn.Open();
-                SqlCommand cmd1 = new SqlCommand("insert into Result values(@stu_id,@exam_id,@ename,@result,@mark)", cn);
-                cmd1.Parameters.AddWithValue("@stu_id",ses);
-                cmd1.Parameters.AddWithValue("@exam_id", Convert.ToInt32(exam_id));
-                cmd1.Parameters.AddWithValue("@ename",Exam_name);
-                cmd1.Parameters.AddWithValue("@result", resultstr);
-                cmd1.Parameters.AddWithValue("@mark", marks);
-                
-                int i = cmd1.ExecuteNonQuery();
-                if (i > 0)
-                {
-                    Label3.Text = "Thank You for Completeing Exam";
-                    
-                }
-                else
-                {
-                    Label3.Text = "Result is not inserted";
-                }
-            }
-            catch(Exception ex)
+
+            //try
+            //{
+            cn.Open();
+            SqlCommand cmd1 = new SqlCommand("insert into Result values(@stu_id,@exam_id,@ename,@result,@mark)", cn);
+            cmd1.Parameters.AddWithValue("@stu_id", ses);
+            cmd1.Parameters.AddWithValue("@exam_id", Convert.ToInt32(exam_id));
+            cmd1.Parameters.AddWithValue("@ename", Exam_name);
+            cmd1.Parameters.AddWithValue("@result", resultstr);
+            cmd1.Parameters.AddWithValue("@mark", marks);
+
+            int i = cmd1.ExecuteNonQuery();
+            if (i > 0)
             {
-                Label3.Text = "Error: " + ex.Message;
+                Label3.Text = "Thank You for Completeing Exam";
+
             }
+            else
+            {
+                Label3.Text = "Result is not inserted";
+            }
+            enablebutton();
+            //}
+            //catch (Exception ex)
+            //{
+            //    Label3.Text = "Error: " + ex.Message;
+            //}
         }
 
         protected void Finish_Click1(object sender, EventArgs e)
@@ -268,7 +262,7 @@ namespace Project
                 result(resultanswer, "Fail");
             }
             upanel.Visible = false;
-        } 
+        }
         public void calculate_mark()
         {
             try
@@ -311,7 +305,7 @@ namespace Project
         protected void Timer1_Tick(object sender, EventArgs e)
         {
             current_time = DateTime.Now;
-            int remaining_seconds=Convert.ToInt32((finish_time - current_time).TotalSeconds);
+            int remaining_seconds = Convert.ToInt32((finish_time - current_time).TotalSeconds);
             Session["time"] = remaining_seconds;
             int i = DateTime.Compare(current_time, finish_time);
             //Label3.Text = remaining_seconds.ToString();
@@ -324,7 +318,7 @@ namespace Project
                 clock.Text = minutes + ":" + seconds;
             }
             else
-            {           
+            {
                 clock.Text = "Timeout!";
                 Next.Visible = false;
                 calculate_mark();
@@ -337,8 +331,8 @@ namespace Project
                     result(resultanswer, "Fail");
                 }
                 upanel.Visible = false;
+                Timer1.Enabled = false;
             }
-           
         }
 
         public void radiobuttonunchecked()
@@ -390,6 +384,36 @@ namespace Project
             {
                 RadioButton4.Checked = true;
             }
+        }
+        public void disablebutton()
+        {
+            HyperLink Home = (HyperLink)Page.Master.FindControl("Home");
+            Home.Enabled = false;
+            HyperLink Exam = (HyperLink)Page.Master.FindControl("Exam");
+            Exam.Enabled = false;
+            HyperLink Result = (HyperLink)Page.Master.FindControl("Result");
+            Result.Enabled = false;
+            HyperLink EditProfile = (HyperLink)Page.Master.FindControl("EditProfile");
+            EditProfile.Enabled = false;
+            HyperLink ResetPassword = (HyperLink)Page.Master.FindControl("ResetPassword");
+            ResetPassword.Enabled = false;
+            LinkButton logout = (LinkButton)Page.Master.FindControl("link_logout");
+            logout.Enabled = false;
+        }
+        public void enablebutton()
+        {
+            HyperLink Home = (HyperLink)Page.Master.FindControl("Home");
+            Home.Enabled = true;
+            HyperLink Exam = (HyperLink)Page.Master.FindControl("Exam");
+            Exam.Enabled = true;
+            HyperLink Result = (HyperLink)Page.Master.FindControl("Result");
+            Result.Enabled = true;
+            HyperLink EditProfile = (HyperLink)Page.Master.FindControl("EditProfile");
+            EditProfile.Enabled = true;
+            HyperLink ResetPassword = (HyperLink)Page.Master.FindControl("ResetPassword");
+            ResetPassword.Enabled = true;
+            LinkButton logout = (LinkButton)Page.Master.FindControl("link_logout");
+            logout.Enabled = true;
         }
     }
 }

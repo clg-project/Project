@@ -10,7 +10,6 @@ using System.Collections;
 using System.Configuration;
 using System.Text;
 using System.Data;
-using System.Configuration;
 
 namespace Project
 {
@@ -19,7 +18,7 @@ namespace Project
         SqlConnection cn = new SqlConnection(ConfigurationManager.ConnectionStrings["TestConnectionString"].ConnectionString);
         protected void Page_Load(object sender, EventArgs e)
         {
-           
+
         }
 
         protected void Button1_Click(object sender, EventArgs e)
@@ -38,7 +37,7 @@ namespace Project
                 {
                     if (Convert.ToBoolean(dr["ReturnCode"]))
                     {
-                        Mailtemp(dr["Email"].ToString(),dr["username"].ToString(),dr["UniqueId"].ToString());
+                        Mailtemp(dr["Email"].ToString(), dr["username"].ToString(), dr["UniqueId"].ToString());
                     }
                     else
                     {
@@ -48,22 +47,21 @@ namespace Project
             };
 
         }
-        public void Mailtemp(string toemail,string Username,string Uniqueid)
+        public void Mailtemp(string toemail, string Username, string Uniqueid)
         {
-            
+
             try
             {
                 MailMessage mail = new MailMessage();
                 mail.To.Add(TextBox1.Text.ToString());
                 mail.From = new MailAddress("gabaniparth04@gmail.com");
                 mail.Subject = "Password Recovery";
-                //string Body = "Your Secret code is : " + Session["code"].ToString();
 
                 StringBuilder sbEmailBody = new StringBuilder();
                 sbEmailBody.Append("Dear " + Username + ",<br/><br/>");
                 sbEmailBody.Append("Please click on the following link to reset your password");
                 sbEmailBody.Append("<br/>"); sbEmailBody.Append("http://localhost:50141/Home/New_password.aspx?uid=" + Uniqueid);
-            
+
                 mail.IsBodyHtml = true;
 
                 mail.Body = sbEmailBody.ToString();
@@ -81,7 +79,8 @@ namespace Project
             {
                 Resultmsg.Text = "something went wrong.plz check if you connect ot internet";
             }
+
         }
     }
-    
+
 }

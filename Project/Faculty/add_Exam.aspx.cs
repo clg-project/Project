@@ -15,8 +15,8 @@ namespace Project.Faculty
 {
     public partial class add_Exam : System.Web.UI.Page
     {
-        string Exam_id,Que_id,Que_number;
-        int Que_id_increment=0;
+        string Exam_id, Que_id, Que_number;
+        int Que_id_increment = 0;
         SqlConnection cn = new SqlConnection(ConfigurationManager.ConnectionStrings["TestConnectionString"].ConnectionString);
 
         protected void time_TextChanged(object sender, EventArgs e)
@@ -26,14 +26,14 @@ namespace Project.Faculty
 
         protected void b1_Click(object sender, EventArgs e)
         {
-            
+
         }
         protected void Page_Load(object sender, EventArgs e)
         {
             if (IsPostBack == false)
             {
                 cn.Open();
-                SqlCommand cmd = new SqlCommand("select *from category",cn);
+                SqlCommand cmd = new SqlCommand("select *from category", cn);
                 SqlDataAdapter da = new SqlDataAdapter();
                 da.SelectCommand = cmd;
                 DataSet ds = new DataSet();
@@ -41,24 +41,24 @@ namespace Project.Faculty
                 dropdownlist1.DataSource = ds;
                 dropdownlist1.DataBind();
             }
-            CompareValidator1.ValueToCompare= DateTime.Now.ToShortDateString();
+            CompareValidator1.ValueToCompare = DateTime.Now.ToShortDateString();
             if (Session["faculty"] == null)
             {
                 Response.Redirect("~/Home/login.aspx");
             }
-           
+
         }
         protected void Button1_Click(object sender, EventArgs e)
         {
             try
             {
-       
+
                 cn.Open();
                 SqlCommand cmd1 = new SqlCommand("insert into Exam values(@Exam_name,@Marks,@reqmarks,@time,@startdate,@enddate,@fid,@cid)", cn);
                 cmd1.Parameters.AddWithValue("@Exam_name", Ename.Text);
                 cmd1.Parameters.AddWithValue("@Marks", Convert.ToInt32(marks.Text));
-                cmd1.Parameters.AddWithValue("@reqmarks",Convert.ToInt32(req_marks.Text));
-                cmd1.Parameters.AddWithValue("@time",Convert.ToInt32(time.Text));
+                cmd1.Parameters.AddWithValue("@reqmarks", Convert.ToInt32(req_marks.Text));
+                cmd1.Parameters.AddWithValue("@time", Convert.ToInt32(time.Text));
                 cmd1.Parameters.AddWithValue("@startdate", start_date.Text);
                 cmd1.Parameters.AddWithValue("@enddate", end_date.Text);
                 cmd1.Parameters.AddWithValue("@fid", Session["faculty"].ToString());
@@ -74,9 +74,9 @@ namespace Project.Faculty
                     result.Text = "Something went wrong.please try again";
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                result.Text = "Something went wrong. Subject is not added: "+ex.Message;
+                result.Text = "Something went wrong. Subject is not added: " + ex.Message;
             }
             cn.Close();
 

@@ -74,7 +74,8 @@ namespace Project
                 cmd.Parameters.AddWithValue("@pin", TextBox7.Text);
                 cmd.Parameters.AddWithValue("@country", TextBox8.Text);
                 string s = TextBox9.Text;
-                DateTime dt = DateTime.Parse(s);
+
+                DateTime dt = DateTime.ParseExact(s, "dd/MM/yyyy", null);
                 cmd.Parameters.AddWithValue("@dob", dt);
                 cmd.Parameters.AddWithValue("@gender", RadioButtonList1.SelectedValue);
                 cmd.Parameters.AddWithValue("@mno", TextBox10.Text);
@@ -83,7 +84,7 @@ namespace Project
                 int i = cmd.ExecuteNonQuery();
                 if (i <= 0)
                 {
-                    resultmsg.Text = "There is some problem updating Profile"+s;
+                    resultmsg.Text = "There is some problem updating Profile" + s;
                 }
                 else
                 {
@@ -94,11 +95,11 @@ namespace Project
                 ClearInputs(Page.Controls);
                 RadioButtonList1.SelectedIndex = -1;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-               resultmsg.Text = ex.Message;
+                resultmsg.Text = ex.Message;
             }
-            
+
         }
         protected void Button4_Click(object sender, EventArgs e)
         {

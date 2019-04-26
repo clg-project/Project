@@ -108,7 +108,6 @@
     <Content Include="Home\AboutUs.aspx" />
     <Content Include="CSS\main.css" />
     <Content Include="Faculty\Edit_profile_faculty.aspx" />
-    <Content Include="Home\code_verification.aspx" />
     <Content Include="Home\New_password.aspx" />
     <Content Include="hps.aspx" />
     <Content Include="image\1.png" />
@@ -130,6 +129,7 @@
     <Content Include="Student\Result.aspx" />
     <Content Include="Student\Student_homepage.aspx" />
     <Content Include="Student\WebForm1.aspx" />
+    <Content Include="Student\WebForm2.aspx" />
     <Content Include="temp\tempmaster.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -269,13 +269,6 @@
     </Compile>
     <Compile Include="Faculty\Edit_profile_faculty.aspx.designer.cs">
       <DependentUpon>Edit_profile_faculty.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Home\code_verification.aspx.cs">
-      <DependentUpon>code_verification.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Home\code_verification.aspx.designer.cs">
-      <DependentUpon>code_verification.aspx</DependentUpon>
     </Compile>
     <Compile Include="Home\New_password.aspx.cs">
       <DependentUpon>New_password.aspx</DependentUpon>
@@ -452,6 +445,13 @@
     </Compile>
     <Compile Include="Student\WebForm1.aspx.designer.cs">
       <DependentUpon>WebForm1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Student\WebForm2.aspx.cs">
+      <DependentUpon>WebForm2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Student\WebForm2.aspx.designer.cs">
+      <DependentUpon>WebForm2.aspx</DependentUpon>
     </Compile>
     <Compile Include="temp\temp.Master.cs">
       <DependentUpon>temp.Master</DependentUpon>

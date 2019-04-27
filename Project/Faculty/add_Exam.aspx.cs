@@ -97,7 +97,7 @@ namespace Project.Faculty
             }
             else
             {
-                result.Text = "No student";
+                //result.Text = "No student";
                 cn.Close();
             }
 

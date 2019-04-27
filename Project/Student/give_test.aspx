@@ -57,6 +57,7 @@
         </ContentTemplate>
         <Triggers>
             <asp:AsyncPostBackTrigger ControlID="Timer1" EventName="Tick" />
+            <asp:AsyncPostBackTrigger ControlID="Button2" EventName="Click" />
         </Triggers>
         </asp:UpdatePanel>    
     <asp:Label ID="Label3" runat="server" style="margin-left:50px;"></asp:Label>

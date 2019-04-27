@@ -12,7 +12,7 @@
         </tr>
 
         <tr>
-            <td style="width: 175px; height: 35px; vertical-align: middle">F_name</td>
+            <td style="width: 175px; height: 35px; vertical-align: middle">Name</td>
             <td style="height: 35px; vertical-align: middle">
                 <asp:TextBox ID="TextBox2" runat="server" CssClass="form-control" Style="margin-bottom: 20px;" Width="225px"></asp:TextBox>
                 <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" Display="Dynamic" ErrorMessage="*plz fill the field" ControlToValidate="TextBox2" ForeColor="Red" ValidationGroup="errmsg"></asp:RequiredFieldValidator>

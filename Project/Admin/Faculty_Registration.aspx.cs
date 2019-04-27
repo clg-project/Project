@@ -14,6 +14,10 @@ namespace Project
         SqlConnection cn = new SqlConnection(ConfigurationManager.ConnectionStrings["TestConnectionString"].ConnectionString);
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["admin"] == null)
+            {
+                Response.Redirect("~/Home/login.aspx");
+            }
             errfid.Text = "";
         }
 
@@ -21,25 +25,24 @@ namespace Project
         {
             int i = 0;
             cn.Open();
-            SqlCommand cmd = new SqlCommand("select F_id from faculty", cn);
+            SqlCommand cmd = new SqlCommand("select F_id from faculty where F_id=@fid", cn);
+            cmd.Parameters.AddWithValue("@fid", TextBox1.Text);
             SqlDataReader dr = cmd.ExecuteReader();
             if (dr.HasRows)
             {
-                while (dr.Read())
-                {
-                    if (dr[0].ToString() == TextBox1.Text)
-                    {
+               // while (dr.Read())
+                //{
+                  //  if (dr[0].ToString() == TextBox1.Text)
+                   // {
                         errfid.Text = "*Faculty Id already exist, Try different Faculty Id";
                         i++;
-                    }
-
-                }
+                    //}
+                //}
 
             }
             cn.Close();
             if (i == 0)
             {
-
                 try
                 {
                     String s = "insert into Faculty values('" + TextBox1.Text + "','" + TextBox2.Text + "','" + TextBox4.Text + "','" + TextBox3.Text + "')";

@@ -221,7 +221,7 @@ namespace Project
             cmd.Parameters.AddWithValue("@eid", exam_id);
             String Exam_name = cmd.ExecuteScalar().ToString();
             cn.Close();
-
+            
             //try
             //{
             cn.Open();
@@ -242,6 +242,8 @@ namespace Project
             {
                 Label3.Text = "Result is not inserted";
             }
+            cn.Close();
+            //deleteanswer();
             enablebutton();
             //}
             //catch (Exception ex)
@@ -249,6 +251,7 @@ namespace Project
             //    Label3.Text = "Error: " + ex.Message;
             //}
         }
+        
 
         protected void Finish_Click1(object sender, EventArgs e)
         {
@@ -414,6 +417,14 @@ namespace Project
             ResetPassword.Enabled = true;
             LinkButton logout = (LinkButton)Page.Master.FindControl("link_logout");
             logout.Enabled = true;
+        }
+        public void deleteanswer()
+        {
+            cn.Open();
+            SqlCommand cmd = new SqlCommand("delete from tmpanswer where Student_id=@sid");
+            cmd.Parameters.AddWithValue("@sid", ses);
+            SqlDataReader dr= cmd.ExecuteReader();
+            cn.Close();
         }
     }
 }

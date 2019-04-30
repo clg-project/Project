@@ -16,20 +16,24 @@ namespace Project
         protected void Page_Load(object sender, EventArgs e)
         {
             errsid.Text = "";
-            cn.Open();
-            string sql = "select *from category";
-            SqlCommand cmd = new SqlCommand(sql, cn);
-            SqlDataAdapter da = new SqlDataAdapter();
-            da.SelectCommand = cmd;
-            DataSet ds = new DataSet();
-            da.Fill(ds);
-            DropDownList1.DataSource = ds;
-            DropDownList1.DataBind();
+            if (!IsPostBack)
+            {
+                cn.Open();
+                string sql = "select *from category";
+                SqlCommand cmd = new SqlCommand(sql, cn);
+                SqlDataAdapter da = new SqlDataAdapter();
+                da.SelectCommand = cmd;
+                DataSet ds = new DataSet();
+                da.Fill(ds);
+                DropDownList1.DataSource = ds;
+                DropDownList1.DataBind();
+                cn.Close();
+            }
             if (Session["faculty"] == null)
             {
                 Response.Redirect("~/Home/login.aspx");
             }
-            cn.Close();
+            
         }
         protected void Button1_Click(object sender, EventArgs e)
         {
@@ -81,6 +85,11 @@ namespace Project
                     Result.Text = "Data not inserted coorectly" + ex.Message;
                 }
             }
+        }
+
+        protected void Button4_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Register.aspx");
         }
     }
 }

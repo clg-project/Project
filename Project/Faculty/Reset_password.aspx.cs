@@ -38,7 +38,7 @@ namespace Project.Faculty
             }
             else
             {
-                Label1.Text = "Password chnaged successfully";
+                Label1.Text = "Password changed successfully";
 
             }
             cn.Close();

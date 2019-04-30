@@ -109,6 +109,7 @@
     <Content Include="CSS\main.css" />
     <Content Include="Faculty\Edit_profile_faculty.aspx" />
     <Content Include="Home\New_password.aspx" />
+    <Content Include="Home\WebForm2.aspx" />
     <Content Include="hps.aspx" />
     <Content Include="image\1.png" />
     <Content Include="Masterpage\demo.aspx" />
@@ -276,6 +277,13 @@
     </Compile>
     <Compile Include="Home\New_password.aspx.designer.cs">
       <DependentUpon>New_password.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Home\WebForm2.aspx.cs">
+      <DependentUpon>WebForm2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Home\WebForm2.aspx.designer.cs">
+      <DependentUpon>WebForm2.aspx</DependentUpon>
     </Compile>
     <Compile Include="hps.aspx.cs">
       <DependentUpon>hps.aspx</DependentUpon>

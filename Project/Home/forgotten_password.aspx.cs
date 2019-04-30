@@ -73,7 +73,7 @@ namespace Project
                 smtp.Credentials = new System.Net.NetworkCredential("gabaniparth04@gmail.com", "gabaniparth04");
                 smtp.EnableSsl = true;
                 smtp.Send(mail);
-                Resultmsg.Text = "Mail sended successfully.";
+                Resultmsg.Text = "Plz check your email.";
             }
             catch
             {

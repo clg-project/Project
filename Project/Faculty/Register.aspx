@@ -134,7 +134,7 @@
             <tr>
                 <td>
                     <asp:Button ID="Button3" runat="server" Text="Submit" CssClass="btn btn-primary" OnClick="Button1_Click" ValidationGroup="errmsg" />
-                    </td><td><asp:Button ID="Button4" runat="server" CssClass="btn btn-primary" Text="Reset"  />
+                    </td><td><asp:Button ID="Button4" runat="server" CssClass="btn btn-primary" Text="Reset" OnClick="Button4_Click"  />
                     <asp:Label ID="Result" runat="server"></asp:Label>
                 </td>
             </tr>

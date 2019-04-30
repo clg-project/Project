@@ -13,7 +13,7 @@ namespace Project.Home
     public partial class New_password : System.Web.UI.Page
     {
         string s,email;
-        int id;
+        string id;
         SqlConnection cn = new SqlConnection(ConfigurationManager.ConnectionStrings["TestConnectionString"].ConnectionString);
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -30,7 +30,7 @@ namespace Project.Home
             
             if (dr.Read())
             {
-                id = (int)dr["studentID"];
+                id = dr["studentID"].ToString();
                 // Response.Redirect("login.aspx");
             }
             else
